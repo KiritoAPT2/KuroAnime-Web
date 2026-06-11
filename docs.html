@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KuroAnime - Documentación</title>
+  <link rel="icon" type="image/png" href="assets/icon.png">
+  <link rel="preconnect" href="https://db.onlinewebfonts.com">
+  <style>
+    @font-face {
+      font-family: "Helvetica Regular";
+      src: url("https://db.onlinewebfonts.com/t/a64ff11d2c24584c767f6257e880dc65.eot");
+      src: url("https://db.onlinewebfonts.com/t/a64ff11d2c24584c767f6257e880dc65.eot?#iefix") format("embedded-opentype"),
+           url("https://db.onlinewebfonts.com/t/a64ff11d2c24584c767f6257e880dc65.woff2") format("woff2"),
+           url("https://db.onlinewebfonts.com/t/a64ff11d2c24584c767f6257e880dc65.woff") format("woff"),
+           url("https://db.onlinewebfonts.com/t/a64ff11d2c24584c767f6257e880dc65.ttf") format("truetype");
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: "Helvetica Regular", ui-sans-serif, system-ui, sans-serif;
+      background: #f0f0f0;
+      color: #1e325a;
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+
+    ::selection { background: #ef5350; color: #fff; }
+
+    .page-wrap {
+      max-width: 1536px;
+      margin: 0 auto;
+      min-height: 100vh;
+      position: relative;
+      overflow: hidden;
+      border-radius: 0;
+    }
+
+    @media (min-width: 768px) {
+      .page-wrap {
+        border-radius: 0 0 3rem 3rem;
+      }
+    }
+
+    .bg-video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 0;
+      filter: blur(2.5px);
+      opacity: 0.4;
+    }
+
+    .content-overlay {
+      position: relative;
+      z-index: 10;
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.5rem 1.5rem;
+      width: 100%;
+      position: relative;
+      z-index: 10;
+    }
+
+    @media (min-width: 768px) {
+      nav { padding: 1.5rem 2.5rem; }
+    }
+
+    .nav-links {
+      display: none;
+      list-style: none;
+      gap: 0.5rem;
+    }
+
+    @media (min-width: 768px) {
+      .nav-links { display: flex; }
+    }
+
+    .nav-links a {
+      padding: 0.375rem 0.75rem;
+      border-radius: 0.5rem;
+      font-size: 0.875rem;
+      color: rgba(255,255,255,0.7);
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: #fff;
+      background: rgba(255,255,255,0.08);
+    }
+
+    .nav-links a.active {
+      color: #ef5350;
+      background: rgba(239,83,80,0.15);
+    }
+
+    .nav-title-mobile {
+      display: block;
+      font-size: 1.125rem;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      color: #fff;
+    }
+
+    @media (min-width: 768px) {
+      .nav-title-mobile { display: none; }
+    }
+
+    .btn-github {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.15);
+      color: #fff;
+      font-size: 0.8125rem;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    .btn-github:hover {
+      background: rgba(255,255,255,0.18);
+    }
+
+    .btn-github svg {
+      width: 1rem;
+      height: 1rem;
+    }
+
+    /* ─── DOCS CONTENT ─── */
+    .docs-wrap {
+      max-width: 48rem;
+      margin: 0 auto;
+      padding: 2rem 1.5rem 4rem;
+    }
+
+    @media (min-width: 768px) {
+      .docs-wrap { padding: 3rem 1.5rem 5rem; }
+    }
+
+    .docs-header h1 {
+      font-size: clamp(1.75rem, 4vw, 3rem);
+      font-weight: 400;
+      letter-spacing: -0.03em;
+      color: rgb(45,45,45);
+      margin-bottom: 0.5rem;
+    }
+
+    .docs-header p {
+      font-size: 0.9375rem;
+      color: rgba(30,50,90,0.7);
+      margin-bottom: 2.5rem;
+    }
+
+    .docs-header a {
+      color: #ef5350;
+      text-decoration: none;
+    }
+
+    .docs-header a:hover {
+      text-decoration: underline;
+    }
+
+    .doc-card {
+      background: rgba(255,255,255,0.6);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 1.5rem;
+      padding: 1.5rem;
+      margin-bottom: 1.25rem;
+      transition: transform 0.2s;
+    }
+
+    @media (min-width: 768px) {
+      .doc-card { padding: 1.75rem; }
+    }
+
+    .doc-card:hover {
+      transform: translateY(-1px);
+    }
+
+    .doc-card h2 {
+      font-size: 1.25rem;
+      font-weight: 500;
+      color: rgb(45,45,45);
+      margin-bottom: 0.75rem;
+      letter-spacing: -0.02em;
+    }
+
+    .doc-card p {
+      font-size: 0.875rem;
+      color: rgba(30,50,90,0.75);
+      line-height: 1.7;
+      margin-bottom: 0.75rem;
+    }
+
+    .doc-card p:last-child {
+      margin-bottom: 0;
+    }
+
+    .doc-card code {
+      background: rgba(255,255,255,0.5);
+      padding: 0.125rem 0.375rem;
+      border-radius: 0.25rem;
+      font-size: 0.75rem;
+      font-family: ui-monospace, monospace;
+    }
+
+    .doc-card pre {
+      background: rgba(0,0,0,0.04);
+      border: 1px solid rgba(0,0,0,0.06);
+      border-radius: 0.75rem;
+      padding: 0.75rem 1rem;
+      font-size: 0.8rem;
+      font-family: ui-monospace, monospace;
+      overflow-x: auto;
+      margin: 0.75rem 0;
+      color: rgb(45,45,45);
+    }
+
+    .doc-card .highlight {
+      color: #ef5350;
+    }
+
+    .doc-card ul {
+      list-style: none;
+      padding: 0;
+      margin: 0.5rem 0;
+    }
+
+    .doc-card ul li {
+      font-size: 0.875rem;
+      color: rgba(30,50,90,0.75);
+      line-height: 1.7;
+      padding-left: 1.25rem;
+      position: relative;
+    }
+
+    .doc-card ul li::before {
+      content: "·";
+      position: absolute;
+      left: 0.375rem;
+      color: #ef5350;
+    }
+
+    .doc-card table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 0.75rem 0;
+      font-size: 0.8125rem;
+    }
+
+    .doc-card th {
+      text-align: left;
+      padding: 0.5rem 0.75rem;
+      background: rgba(255,255,255,0.4);
+      color: rgb(45,45,45);
+      font-weight: 500;
+      border-bottom: 1px solid rgba(0,0,0,0.08);
+    }
+
+    .doc-card td {
+      padding: 0.5rem 0.75rem;
+      color: rgba(30,50,90,0.75);
+      border-bottom: 1px solid rgba(0,0,0,0.04);
+    }
+
+    .doc-card a {
+      color: #ef5350;
+      text-decoration: none;
+    }
+
+    .doc-card a:hover {
+      text-decoration: underline;
+    }
+
+    /* ─── FADE-IN ─── */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 767px) {
+      .hide-mobile { display: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="page-wrap">
+    <video class="bg-video" autoplay muted loop playsinline src="assets/bg.mp4"></video>
+
+    <div class="content-overlay">
+      <!-- ─── NAV ─── -->
+      <nav>
+        <div class="hide-mobile"></div>
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="index.html">App</a></li>
+          <li><a href="https://github.com/KiritoAPT2/KuroAnime" target="_blank">Desarrolladores</a></li>
+          <li><a href="https://github.com/KiritoAPT2/KuroAnime/blob/main/LICENSE" target="_blank">Licencia</a></li>
+        </ul>
+        <span class="nav-title-mobile">KuroAnime</span>
+        <a href="https://github.com/KiritoAPT2/KuroAnime" target="_blank" class="btn-github">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+          GitHub oficial
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+        </a>
+      </nav>
+
+      <!-- ─── DOCS ─── -->
+      <div class="docs-wrap">
+        <div class="docs-header">
+          <h1>Documentación Oficial</h1>
+          <p>Aplicación Android para ver anime subtitulado y latino mediante un sistema de extensiones — creada por <a href="https://github.com/KiritoAPT2" target="_blank">KiritoAPT2</a></p>
+        </div>
+
+        <!-- 1 -->
+        <div class="doc-card fade-in">
+          <h2>Introducción</h2>
+          <p>KuroAnime es una aplicación Android enfocada en el consumo de anime subtitulado y doblado al español latino mediante un sistema moderno de <strong>extensiones</strong>. El proyecto nace como una alternativa liviana y sin anuncios para la comunidad hispanohablante.</p>
+          <p>Su objetivo principal es ofrecer una experiencia limpia y rápida para acceder a contenido desde múltiples fuentes dentro de una sola aplicación, con diseño OLED para ahorrar batería en pantallas AMOLED.</p>
+          <p><a href="https://github.com/KiritoAPT2/KuroAnime" target="_blank">KuroAnime GitHub →</a></p>
+        </div>
+
+        <!-- 2 -->
+        <div class="doc-card fade-in">
+          <h2>Filosofía del Proyecto</h2>
+          <p>KuroAnime fue diseñado pensando en la simplicidad y la libertad del usuario. En lugar de depender de una única fuente de contenido, utiliza un sistema modular basado en <strong>extensiones JavaScript y Kotlin</strong> que permite agregar nuevas plataformas fácilmente.</p>
+          <p>La aplicación es completamente gratuita, sin anuncios ni rastreo. Todo el contenido se obtiene directamente de fuentes públicas mediante scraping, sin intermediarios ni servidores propios.</p>
+        </div>
+
+        <!-- 3 -->
+        <div class="doc-card fade-in">
+          <h2>Compatibilidad</h2>
+          <p>KuroAnime está desarrollada para dispositivos <strong>Android</strong> con versión mínima <code>API 24 (Android 7.0)</code> y apunta a <code>API 35 (Android 15)</code>.</p>
+          <p>Para instalar la aplicación:</p>
+          <pre># Compilar desde código fuente
+git clone https://github.com/KiritoAPT2/KuroAnime.git
+cd KuroAnime
+./gradlew assembleDebug
+
+# APK generado en:
+# app/build/outputs/apk/debug/app-debug.apk</pre>
+          <p>También puedes descargar la última versión precompilada desde <a href="https://github.com/KiritoAPT2/KuroAnime/releases" target="_blank">GitHub Releases</a>.</p>
+        </div>
+
+        <!-- 4 -->
+        <div class="doc-card fade-in">
+          <h2>Sistema de Extensiones</h2>
+          <p>Uno de los pilares principales de KuroAnime es su arquitectura basada en extensiones. Cada extensión es responsable de obtener información desde sitios compatibles y transformarla en contenido reproducible dentro de la aplicación.</p>
+          <p>Actualmente hay dos tipos de extensiones:</p>
+          <ul>
+            <li><strong>JavaScript (QuickJS)</strong> — cargadas desde <code>assets/extensions/</code>, ejecutadas con un motor JS embebido. Prioridad sobre Kotlin.</li>
+            <li><strong>Kotlin nativas</strong> — implementadas directamente en el código usando Jsoup o Ktor para sitios que requieren lógica más compleja.</li>
+          </ul>
+          <p>El sistema permite:</p>
+          <ul>
+            <li>Buscar contenido por palabras clave</li>
+            <li>Obtener los últimos episodios agregados</li>
+            <li>Navegar por categorías y géneros</li>
+            <li>Cargar información detallada de cada anime</li>
+            <li>Generar enlaces de reproducción desde múltiples servidores</li>
+          </ul>
+        </div>
+
+        <!-- 5 -->
+        <div class="doc-card fade-in">
+          <h2>Funciones de las Extensiones</h2>
+          <p>Cada extensión implementa funciones específicas para integrarse correctamente con la aplicación:</p>
+          <table>
+            <tr><th>Función</th><th>Descripción</th></tr>
+            <tr><td><code>getLatest(page)</code></td><td>Obtiene los animes más recientes</td></tr>
+            <tr><td><code>search(query, page)</code></td><td>Busca animes por nombre</td></tr>
+            <tr><td><code>getAnimeInfo(url)</code></td><td>Obtiene detalles completos de un anime</td></tr>
+            <tr><td><code>getEpisodes(url)</code></td><td>Lista todos los episodios disponibles</td></tr>
+            <tr><td><code>getVideoSources(url)</code></td><td>Genera enlaces de reproducción</td></tr>
+          </table>
+        </div>
+
+        <!-- 6 -->
+        <div class="doc-card fade-in">
+          <h2>Fuentes Soportadas</h2>
+          <p>KuroAnime incluye soporte para múltiples fuentes de contenido, cada una implementada como una extensión independiente:</p>
+          <ul>
+            <li><strong>AnimeFLV</strong> — scraping vía Jsoup desde <code>animeflv.net</code></li>
+            <li><strong>Latanime</strong> — scraping desde <code>latanime.org</code> para doblaje latino</li>
+            <li><strong>TioAnime</strong> — API JSON desde <code>jimov-api.vercel.app</code></li>
+            <li><strong>Aniyae</strong> — scraping vía Ktor desde <code>open.aniyae.net</code></li>
+          </ul>
+          <p>Las extensiones se agregan automáticamente al iniciar la aplicación. No requieren configuración manual.</p>
+        </div>
+
+        <!-- 7 -->
+        <div class="doc-card fade-in">
+          <h2>Estructura del Proyecto</h2>
+          <p>El repositorio está organizado para separar correctamente el sistema de extensiones, la UI y la configuración:</p>
+          <pre>KuroAnime/
+├── app/
+│   ├── build.gradle.kts
+│   └── src/main/
+│       ├── assets/extensions/   — .js para QuickJS
+│       ├── java/com/kuroanime/
+│       │   ├── data/            — modelos, HTTP client
+│       │   ├── extension/       — motor de extensiones
+│       │   ├── player/          — ExoPlayer + resolvers
+│       │   └── ui/              — Compose screens
+│       └── res/                 — iconos, temas
+├── gradle/
+│   └── libs.versions.toml      — dependencias
+├── build.gradle.kts
+└── settings.gradle.kts</pre>
+        </div>
+
+        <!-- 8 -->
+        <div class="doc-card fade-in">
+          <h2>Código Abierto y Comunidad</h2>
+          <p>KuroAnime es un proyecto <strong>open source</strong>. Esto significa que cualquier persona puede estudiar, modificar y contribuir al código.</p>
+          <p>La comunidad puede participar mediante:</p>
+          <ul>
+            <li>Reportes de errores o problemas</li>
+            <li>Sugerencias de nuevas fuentes o funciones</li>
+            <li>Creación de extensiones JavaScript</li>
+            <li>Pull Requests con mejoras</li>
+          </ul>
+          <p><a href="https://github.com/KiritoAPT2/KuroAnime/issues" target="_blank">KuroAnime Issues →</a></p>
+        </div>
+
+        <!-- 9 -->
+        <div class="doc-card fade-in">
+          <h2>Futuro del Proyecto</h2>
+          <p>El objetivo a largo plazo de KuroAnime es convertirse en una de las principales aplicaciones open source para ver anime en Android. El proyecto busca expandir el ecosistema de extensiones, mejorar la interfaz, optimizar el rendimiento y agregar nuevas funcionalidades como:</p>
+          <ul>
+            <li>Soporte para download de episodios</li>
+            <li>Lista de seguimiento personalizada</li>
+            <li>Notificaciones de nuevos episodios</li>
+            <li>Más extensiones de la comunidad</li>
+            <li>Mejoras en el reproductor de video</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
