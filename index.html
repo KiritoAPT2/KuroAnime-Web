@@ -325,15 +325,15 @@
     .card-docs {
       bottom: 1.5rem;
       right: 1.5rem;
-      background: rgba(255,255,255,0.1);
+      background: rgba(239,83,80,0.12);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
-      border: 1px solid rgba(255,255,255,0.15);
+      border: 1px solid rgba(239,83,80,0.25);
       border-radius: 1rem;
       padding: 1rem;
       min-width: 180px;
       cursor: pointer;
-      transition: background 0.2s;
+      transition: all 0.25s ease;
       text-decoration: none;
       color: #fff;
     }
@@ -346,7 +346,14 @@
     }
 
     .card-docs:hover {
-      background: rgba(255,255,255,0.15);
+      background: rgba(239,83,80,0.22);
+      border-color: rgba(239,83,80,0.5);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 20px rgba(239,83,80,0.2);
+    }
+
+    .card-docs:active {
+      transform: translateY(0);
     }
 
     .card-docs .doc-title {
@@ -356,6 +363,12 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
+    }
+
+    .card-docs .doc-title span {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
     }
 
     .card-docs .doc-sub {
@@ -368,6 +381,12 @@
       width: 1rem;
       height: 1rem;
       opacity: 0.5;
+      transition: transform 0.25s ease;
+    }
+
+    .card-docs:hover .chevron {
+      transform: translateX(4px);
+      opacity: 1;
     }
 
 
@@ -472,7 +491,7 @@
     <!-- ─── FLOATING DOCS CARD ─── -->
     <a href="docs.html" class="floating-card card-docs">
       <div class="doc-title">
-        <span>Documentación</span>
+        <span><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg> Documentación</span>
         <svg class="chevron" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
       </div>
       <div class="doc-sub">Biblioteca</div>
